@@ -1,0 +1,9 @@
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/car_rental
+    username: postgres
+    password: password
+
+  sql:
+    init:
+      mode: always
