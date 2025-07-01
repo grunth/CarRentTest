@@ -35,7 +35,7 @@ public class ReservationIntegrationTest {
     private WebTestClient webTestClient;
 
     @Autowired
-    private DatabaseClient databaseClient;  // Риктивный клиент для SQL
+    private DatabaseClient databaseClient;
 
     @DynamicPropertySource
     static void setDatasourceProperties(DynamicPropertyRegistry registry) {
@@ -54,7 +54,7 @@ public class ReservationIntegrationTest {
                 .baseUrl("http://localhost:" + port + "/api/reservations")
                 .build();
 
-        // Инициализация базы — создание таблиц и вставка данных
+
         databaseClient.sql("DROP TABLE IF EXISTS reservations").then()
                 .then(databaseClient.sql("DROP TABLE IF EXISTS car_inventory").then())
                 .then(databaseClient.sql(
@@ -70,12 +70,11 @@ public class ReservationIntegrationTest {
                 .then(databaseClient.sql(
                         "INSERT INTO car_inventory (car_type, available_count) VALUES " +
                                 "('SEDAN', 3), ('SUV', 2), ('VAN', 1)").then())
-                .block(); // ждем окончания, чтобы база была готова к тесту
+                .block();
     }
 
     @AfterEach
     public void cleanup() {
-        // Очистка — удаляем таблицы, чтобы не было конфликтов в следующих тестах
         databaseClient.sql("DROP TABLE IF EXISTS reservations").then()
                 .then(databaseClient.sql("DROP TABLE IF EXISTS car_inventory").then())
                 .block();
