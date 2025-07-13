@@ -13,3 +13,9 @@ server:
       resourceserver:
         jwt:
           issuer-uri: http://localhost:8080/realms/demo
+custom:
+  external-api:
+    url: http://localhost:8090/api/data
+    token-uri: http://localhost:8080/realms/demo2/protocol/openid-connect/token
+    client-id: external-app
+    client-secret: inyZ7h243tJ1Rfi4Qr4hOcRmH3UdWhEv
